@@ -1,6 +1,9 @@
+<%= current_user.name %>
+<%= link_to "Log out", logout_path, method: :delete %>
+
 <% @restaurants.each do |r| %>
   <h3><%= r.name %></h3>
   <p>Votes: <%= r.current_votes %></p>
 <%end%>
 
-<%= current_user.name %>
+
