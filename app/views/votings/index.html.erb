@@ -3,7 +3,9 @@
 
 <% @restaurants.each do |r| %>
   <h3><%= r.name %></h3>
-  <p>Votes: <%= r.current_votes %></p>
+  <p>Votes: <%= r.plusminus %></p>
+
+  <%= link_to 'Upvote', upvote_path(restaurant_id: r.id), method: :post %>
 <%end%>
 
 

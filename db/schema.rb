@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406120026) do
+ActiveRecord::Schema.define(version: 20170406125513) do
 
   create_table "restaurants", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 20170406120026) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.boolean  "vote",          default: false, null: false
+    t.string   "voteable_type",                 null: false
+    t.integer  "voteable_id",                   null: false
+    t.string   "voter_type"
+    t.integer  "voter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type"
+    t.index ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true
+    t.index ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type"
   end
 
 end
